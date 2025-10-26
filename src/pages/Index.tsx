@@ -18,7 +18,7 @@ const Index = () => {
         className="relative w-[min(88vmin,900px)] h-[min(88vmin,900px)] rounded-full animate-breathe"
         style={{
           background: `radial-gradient(circle at center, hsl(var(--circle-center)), hsl(var(--circle-edge)))`,
-          boxShadow: `0 0 60px 20px hsl(var(--circle-center) / 0.3)`,
+          boxShadow: `0 0 60px 20px hsl(var(--circle-center) / 0.2)`,
         }}
         aria-label="Breathing circle"
       />
