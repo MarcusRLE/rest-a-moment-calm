@@ -80,10 +80,41 @@ export default {
             height: "0",
           },
         },
+        breathe: {
+          "0%": {
+            transform: "scale(0.35)",
+            opacity: "0.7",
+          },
+          "33.33%": {
+            transform: "scale(1)",
+            opacity: "1",
+          },
+          "66.66%": {
+            transform: "scale(1)",
+            opacity: "1",
+          },
+          "100%": {
+            transform: "scale(0.35)",
+            opacity: "0.7",
+          },
+        },
+        "gradient-drift": {
+          "0%": {
+            backgroundPosition: "0% 50%",
+          },
+          "50%": {
+            backgroundPosition: "100% 50%",
+          },
+          "100%": {
+            backgroundPosition: "0% 50%",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        breathe: "breathe 15s ease-in-out infinite",
+        "gradient-drift": "gradient-drift 75s ease-in-out infinite",
       },
     },
   },
