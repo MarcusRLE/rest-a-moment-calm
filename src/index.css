@@ -28,6 +28,10 @@ All colors MUST be HSL.
     --circle-center: 240 45% 50%;
     --circle-edge: 270 35% 40%;
 
+    /* Countdown segments */
+    --countdown-segment: 45 80% 60%;
+    --countdown-glow: 45 80% 60%;
+
     /* Background gradient stops */
     --bg-stop-1: 230 50% 10%;
     --bg-stop-2: 260 45% 12%;
@@ -67,6 +71,79 @@ All colors MUST be HSL.
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+/* Countdown segment animations - draw arcs during hold phase, fade out during shrinking */
+@keyframes countdown-segment-1 {
+  0%, 33.33% {
+    border-top-color: transparent;
+  }
+  40% {
+    border-top-color: hsl(var(--countdown-segment));
+  }
+  66.66% {
+    border-top-color: hsl(var(--countdown-segment));
+  }
+  100% {
+    border-top-color: transparent;
+  }
+}
+
+@keyframes countdown-segment-2 {
+  0%, 40% {
+    border-top-color: transparent;
+  }
+  46.66% {
+    border-top-color: hsl(var(--countdown-segment));
+  }
+  66.66% {
+    border-top-color: hsl(var(--countdown-segment));
+  }
+  100% {
+    border-top-color: transparent;
+  }
+}
+
+@keyframes countdown-segment-3 {
+  0%, 46.66% {
+    border-top-color: transparent;
+  }
+  53.33% {
+    border-top-color: hsl(var(--countdown-segment));
+  }
+  66.66% {
+    border-top-color: hsl(var(--countdown-segment));
+  }
+  100% {
+    border-top-color: transparent;
+  }
+}
+
+@keyframes countdown-segment-4 {
+  0%, 53.33% {
+    border-top-color: transparent;
+  }
+  60% {
+    border-top-color: hsl(var(--countdown-segment));
+  }
+  66.66% {
+    border-top-color: hsl(var(--countdown-segment));
+  }
+  100% {
+    border-top-color: transparent;
+  }
+}
+
+@keyframes countdown-segment-5 {
+  0%, 60% {
+    border-top-color: transparent;
+  }
+  66.66% {
+    border-top-color: hsl(var(--countdown-segment));
+  }
+  100% {
+    border-top-color: transparent;
   }
 }
 
