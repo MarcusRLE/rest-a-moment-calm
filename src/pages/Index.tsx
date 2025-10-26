@@ -22,22 +22,16 @@ const Index = () => {
         }}
         aria-label="Breathing circle"
       >
-        {/* Countdown Arc Segments */}
-        {[0, 1, 2, 3, 4].map((index) => (
-          <div
-            key={index}
-            className={`absolute w-full h-full animate-countdown-segment-${index + 1}`}
-            style={{
-              borderRadius: '50%',
-              border: '4px solid transparent',
-              borderTopColor: `hsl(var(--countdown-segment))`,
-              transform: `rotate(${index * 72}deg)`,
-              transformOrigin: 'center',
-              boxShadow: `0 0 20px hsl(var(--countdown-glow) / 0.6)`,
-            }}
-            aria-label={`Countdown arc segment ${index + 1}`}
-          />
-        ))}
+        {/* Golden Edge Ring */}
+        <div
+          className="absolute w-full h-full"
+          style={{
+            borderRadius: '100%',
+            border: '5px solid hsl(var(--countdown-segment))',
+            boxShadow: `0 0 30px hsl(var(--countdown-glow) / 0.6)`,
+          }}
+          aria-label="Golden edge ring"
+        />
       </div>
     </div>
   );

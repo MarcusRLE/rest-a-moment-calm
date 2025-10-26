@@ -109,72 +109,12 @@ export default {
             backgroundPosition: "0% 50%",
           },
         },
-        "countdown-segment-1": {
-          "0%, 33.33%": {
-            opacity: "0",
-          },
-          "40%": {
-            opacity: "0.8",
-          },
-          "66.66%, 100%": {
-            opacity: "0.8",
-          },
-        },
-        "countdown-segment-2": {
-          "0%, 40%": {
-            opacity: "0",
-          },
-          "46.66%": {
-            opacity: "0.8",
-          },
-          "66.66%, 100%": {
-            opacity: "0.8",
-          },
-        },
-        "countdown-segment-3": {
-          "0%, 46.66%": {
-            opacity: "0",
-          },
-          "53.33%": {
-            opacity: "0.8",
-          },
-          "66.66%, 100%": {
-            opacity: "0.8",
-          },
-        },
-        "countdown-segment-4": {
-          "0%, 53.33%": {
-            opacity: "0",
-          },
-          "60%": {
-            opacity: "0.8",
-          },
-          "66.66%, 100%": {
-            opacity: "0.8",
-          },
-        },
-        "countdown-segment-5": {
-          "0%, 60%": {
-            opacity: "0",
-          },
-          "66.66%": {
-            opacity: "0.8",
-          },
-          "66.66%, 100%": {
-            opacity: "0.8",
-          },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         breathe: "breathe 15s ease-in-out infinite",
         "gradient-drift": "gradient-drift 75s ease-in-out infinite",
-        "countdown-segment-1": "countdown-segment-1 15s ease-in-out infinite",
-        "countdown-segment-2": "countdown-segment-2 15s ease-in-out infinite",
-        "countdown-segment-3": "countdown-segment-3 15s ease-in-out infinite",
-        "countdown-segment-4": "countdown-segment-4 15s ease-in-out infinite",
-        "countdown-segment-5": "countdown-segment-5 15s ease-in-out infinite",
       },
     },
   },
