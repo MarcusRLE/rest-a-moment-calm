@@ -32,6 +32,29 @@ const Index = () => {
           }}
           aria-label="Golden edge ring"
         />
+
+        {/* Inner Countdown Circles */}
+        {[
+          { x: 50, y: 10, anim: 'animate-inner-pulse-1' }, // Top
+          { x: 87, y: 38, anim: 'animate-inner-pulse-2' }, // Top right
+          { x: 73, y: 82, anim: 'animate-inner-pulse-3' }, // Bottom right
+          { x: 26, y: 82, anim: 'animate-inner-pulse-4' }, // Bottom left
+          { x: 13, y: 37, anim: 'animate-inner-pulse-5' }, // Top left
+        ].map((position, index) => (
+          <div
+          key={index}
+          className={`absolute w-10 h-10 rounded-full ${position.anim}`}
+          style={{
+            boxShadow: `0 0 30px hsl(var(--inner-circle-glow))`,
+            left: `${position.x}%`,
+            top: `${position.y}%`,
+            transform: 'translate(-50%, -50%)',
+            // full-color fill; opacity is animated by the keyframes above
+            background: 'radial-gradient(circle, hsl(var(--inner-circle)), hsl(var(--inner-circle) / 0.3))',
+          }}
+          aria-label={`Countdown circle ${index + 1}`}
+        />
+        ))}
       </div>
     </div>
   );
