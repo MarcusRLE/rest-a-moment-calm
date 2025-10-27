@@ -37,7 +37,28 @@ const Index = () => {
       setIsFullscreen(!!document.fullscreenElement);
     };
 
+    // Detect mobile devices
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                     (window.matchMedia && window.matchMedia("(max-width: 768px)").matches);
+
+    // Handle visibility change to pause audio when page is hidden (mobile only)
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        // Page is hidden, pause all audio
+        rainAudioRef.current?.pause();
+        rainAudioRef2.current?.pause();
+        musicAudioRef.current?.pause();
+      } else if (isSoundOn) {
+        // Page is visible again and sound was on, resume playback
+        rainAudioRef.current?.play().catch(() => {});
+        musicAudioRef.current?.play().catch(() => {});
+      }
+    };
+
     document.addEventListener('fullscreenchange', handleFullscreenChange);
+    if (isMobile) {
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+    }
     
     // Setup audio loops and volumes
     if (rainAudioRef.current) {
@@ -76,8 +97,11 @@ const Index = () => {
 
     return () => {
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      if (isMobile) {
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
+      }
     };
-  }, []);
+  }, [isSoundOn]);
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden flex flex-col items-center justify-center bg-gradient-to-br from-[hsl(var(--bg-stop-1))] via-[hsl(var(--bg-stop-2))] to-[hsl(var(--bg-stop-3))] animate-gradient-drift bg-[length:400%_400%]">
