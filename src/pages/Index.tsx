@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const Index = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isSoundOn, setIsSoundOn] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
@@ -15,6 +17,18 @@ const Index = () => {
     }
   };
 
+  const toggleSound = () => {
+    if (audioRef.current) {
+      if (isSoundOn) {
+        audioRef.current.pause();
+        setIsSoundOn(false);
+      } else {
+        audioRef.current.play();
+        setIsSoundOn(true);
+      }
+    }
+  };
+
   useEffect(() => {
     const handleFullscreenChange = () => {
       setIsFullscreen(!!document.fullscreenElement);
@@ -22,8 +36,10 @@ const Index = () => {
 
     document.addEventListener('fullscreenchange', handleFullscreenChange);
     
-    // Future audio hooks - ready for ambient sound or breath tones
-    // setupAudio();
+    // Setup audio loop
+    if (audioRef.current) {
+      audioRef.current.loop = true;
+    }
 
     return () => {
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
@@ -32,6 +48,31 @@ const Index = () => {
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden flex flex-col items-center justify-center bg-gradient-to-br from-[hsl(var(--bg-stop-1))] via-[hsl(var(--bg-stop-2))] to-[hsl(var(--bg-stop-3))] animate-gradient-drift bg-[length:400%_400%]">
+      {/* Audio Element */}
+      <audio ref={audioRef} src="/rain.mp3" preload="auto" />
+      
+      {/* Sound Toggle Button */}
+      <button
+        onClick={toggleSound}
+        className="absolute top-4 right-16 p-2 rounded-full text-foreground/70 hover:text-foreground hover:bg-foreground/10 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-foreground/20"
+        aria-label={isSoundOn ? "Turn sound off" : "Turn sound on"}
+        title={isSoundOn ? "Turn sound off" : "Turn sound on"}
+      >
+        {isSoundOn ? (
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+          </svg>
+        ) : (
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+            <line x1="23" y1="9" x2="17" y2="15" />
+            <line x1="17" y1="9" x2="23" y2="15" />
+          </svg>
+        )}
+      </button>
+
       {/* Fullscreen Toggle Button */}
       <button
         onClick={toggleFullscreen}
