@@ -3,7 +3,9 @@ import { useEffect, useState, useRef } from "react";
 const Index = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isSoundOn, setIsSoundOn] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const rainAudioRef = useRef<HTMLAudioElement>(null);
+  const rainAudioRef2 = useRef<HTMLAudioElement>(null);
+  const musicAudioRef = useRef<HTMLAudioElement>(null);
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
@@ -18,14 +20,15 @@ const Index = () => {
   };
 
   const toggleSound = () => {
-    if (audioRef.current) {
-      if (isSoundOn) {
-        audioRef.current.pause();
-        setIsSoundOn(false);
-      } else {
-        audioRef.current.play();
-        setIsSoundOn(true);
-      }
+    if (isSoundOn) {
+      rainAudioRef.current?.pause();
+      rainAudioRef2.current?.pause();
+      musicAudioRef.current?.pause();
+      setIsSoundOn(false);
+    } else {
+      rainAudioRef.current?.play();
+      musicAudioRef.current?.play();
+      setIsSoundOn(true);
     }
   };
 
@@ -36,9 +39,39 @@ const Index = () => {
 
     document.addEventListener('fullscreenchange', handleFullscreenChange);
     
-    // Setup audio loop
-    if (audioRef.current) {
-      audioRef.current.loop = true;
+    // Setup audio loops and volumes
+    if (rainAudioRef.current) {
+      rainAudioRef.current.loop = true;
+      rainAudioRef.current.volume = 0.5; // 50% volume for rain
+      
+      // Crossfade setup for seamless looping
+      const handleEnding = () => {
+        const current = rainAudioRef.current;
+        const backup = rainAudioRef2.current;
+        
+        if (current && backup) {
+          // When main audio is near end (95%), start backup
+          if (current.currentTime / current.duration > 0.95 && backup.paused) {
+            backup.currentTime = 0;
+            backup.play().catch(() => {});
+          }
+          
+          // When main audio loops back, backup becomes the active one
+          // Continue the pattern by preparing a new backup
+        }
+      };
+      
+      rainAudioRef.current.addEventListener('timeupdate', handleEnding);
+    }
+    
+    if (rainAudioRef2.current) {
+      rainAudioRef2.current.loop = true;
+      rainAudioRef2.current.volume = 0.5; // 50% volume for rain clone
+    }
+    
+    if (musicAudioRef.current) {
+      musicAudioRef.current.loop = true;
+      musicAudioRef.current.volume = 1; // 100% volume for music
     }
 
     return () => {
@@ -48,8 +81,10 @@ const Index = () => {
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden flex flex-col items-center justify-center bg-gradient-to-br from-[hsl(var(--bg-stop-1))] via-[hsl(var(--bg-stop-2))] to-[hsl(var(--bg-stop-3))] animate-gradient-drift bg-[length:400%_400%]">
-      {/* Audio Element */}
-      <audio ref={audioRef} src="/rain.mp3" preload="auto" />
+      {/* Audio Elements */}
+      <audio ref={rainAudioRef} src="/rain.mp3" preload="auto" />
+      <audio ref={rainAudioRef2} src="/rain.mp3" preload="auto" />
+      <audio ref={musicAudioRef} src="/music.mp3" preload="auto" />
       
       {/* Sound Toggle Button */}
       <button
