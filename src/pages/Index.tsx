@@ -37,12 +37,14 @@ const Index = () => {
 
     document.addEventListener('fullscreenchange', handleFullscreenChange);
     
-    // Setup audio loops
+    // Setup audio loops and volumes
     if (rainAudioRef.current) {
       rainAudioRef.current.loop = true;
+      rainAudioRef.current.volume = 0.5; // 50% volume for rain
     }
     if (musicAudioRef.current) {
       musicAudioRef.current.loop = true;
+      musicAudioRef.current.volume = 1; // 70% volume for music
     }
 
     return () => {
