@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 
 const Index = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isSoundOn, setIsSoundOn] = useState(true);
+  const [isSoundOn, setIsSoundOn] = useState(false);
   const rainAudioRef = useRef<HTMLAudioElement>(null);
   const rainAudioRef2 = useRef<HTMLAudioElement>(null);
   const musicAudioRef = useRef<HTMLAudioElement>(null);
