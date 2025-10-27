@@ -21,7 +21,41 @@ const Index = () => {
           boxShadow: `0 0 60px 20px hsl(var(--circle-center) / 0.2)`,
         }}
         aria-label="Breathing circle"
-      />
+      >
+        {/* Golden Edge Ring */}
+        <div
+          className="absolute w-full h-full"
+          style={{
+            borderRadius: '100%',
+            border: '5px solid hsl(var(--countdown-segment))',
+            boxShadow: `0 0 30px hsl(var(--countdown-glow) / 0.6)`,
+          }}
+          aria-label="Golden edge ring"
+        />
+
+        {/* Inner Countdown Circles */}
+        {[
+          { x: 50, y: 10, anim: 'animate-inner-pulse-1' }, // Top
+          { x: 87, y: 38, anim: 'animate-inner-pulse-2' }, // Top right
+          { x: 73, y: 82, anim: 'animate-inner-pulse-3' }, // Bottom right
+          { x: 26, y: 82, anim: 'animate-inner-pulse-4' }, // Bottom left
+          { x: 13, y: 37, anim: 'animate-inner-pulse-5' }, // Top left
+        ].map((position, index) => (
+          <div
+          key={index}
+          className={`absolute w-10 h-10 rounded-full ${position.anim}`}
+          style={{
+            boxShadow: `0 0 30px hsl(var(--inner-circle-glow))`,
+            left: `${position.x}%`,
+            top: `${position.y}%`,
+            transform: 'translate(-50%, -50%)',
+            // full-color fill; opacity is animated by the keyframes above
+            background: 'radial-gradient(circle, hsl(var(--inner-circle)), hsl(var(--inner-circle) / 0.3))',
+          }}
+          aria-label={`Countdown circle ${index + 1}`}
+        />
+        ))}
+      </div>
     </div>
   );
 };

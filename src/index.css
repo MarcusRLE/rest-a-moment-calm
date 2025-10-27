@@ -28,6 +28,14 @@ All colors MUST be HSL.
     --circle-center: 240 45% 50%;
     --circle-edge: 270 35% 40%;
 
+    /* Countdown segments */
+    --countdown-segment: 45 80% 60%;
+    --countdown-glow: 45 80% 60%;
+
+    /* Inner circles - dim silver moonlight */
+    --inner-circle: 220 15% 70%;
+    --inner-circle-glow: 220 15% 70%;
+
     /* Background gradient stops */
     --bg-stop-1: 230 50% 10%;
     --bg-stop-2: 260 45% 12%;
