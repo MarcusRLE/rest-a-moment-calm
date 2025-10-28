@@ -34,7 +34,7 @@ All colors MUST be HSL.
 
     /* Inner circles - dim silver moonlight */
     --inner-circle: 220 15% 70%;
-    --inner-circle-glow: 220 15% 70%;
+    --inner-circle-glow: 220 15% 100%;
 
     /* Background gradient stops */
     --bg-stop-1: 230 50% 10%;
