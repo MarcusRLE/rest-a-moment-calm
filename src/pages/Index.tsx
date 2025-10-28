@@ -187,12 +187,12 @@ const Index = () => {
           key={index}
           className={`absolute w-10 h-10 rounded-full ${position.anim}`}
           style={{
-            boxShadow: `0 0 30px hsl(var(--inner-circle-glow))`,
+            boxShadow: `0 0 25px hsl(var(--inner-circle-glow))`,
             left: `${position.x}%`,
             top: `${position.y}%`,
             transform: 'translate(-50%, -50%)',
-            // full-color fill; opacity is animated by the keyframes above
-            background: 'radial-gradient(circle, hsl(var(--inner-circle)), hsl(var(--inner-circle) / 0.3))',
+            // No background - only glow effect
+            background: 'transparent',
           }}
           aria-label={`Countdown circle ${index + 1}`}
         />
